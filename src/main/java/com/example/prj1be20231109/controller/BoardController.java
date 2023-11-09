@@ -29,12 +29,25 @@ public class BoardController {
     }
 
     @GetMapping("list")
-    public List<Board> list(){
+    public List<Board> list() {
         return service.list();
     }
+
+    @GetMapping("id/{id}")
+    public Board get(@PathVariable Integer id) {
+        return service.get(id);
+    }
+
+    @DeleteMapping("remove/{id}")
+    public ResponseEntity remove(@PathVariable Integer id) {
+        if (service.remove(id)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
 }
-
-
 
 
 

@@ -36,19 +36,20 @@ public class BoardService {
 
         return true;
     }
-    public List<Board> list(){
+
+    public List<Board> list() {
         return mapper.selectAll();
     }
 
-    public Board get(Integer id){
+    public Board get(Integer id) {
         return mapper.selectById(id);
     }
 
-    public boolean remove(Integer id){
-        return mapper.deleteById(id)==1;
+    public boolean remove(Integer id) {
+        return mapper.deleteById(id) == 1;
     }
 
-    public void update(Board board) {
-        mapper.update(board);
+    public boolean update(Board board) {
+        return mapper.update(board) == 1;
     }
 }

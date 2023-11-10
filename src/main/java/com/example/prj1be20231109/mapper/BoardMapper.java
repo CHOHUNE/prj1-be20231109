@@ -43,5 +43,5 @@ content=#{content},
 writer=#{writer}
 WHERE id=#{id}
 """)
-    void update(Board board);
+    int update(Board board);
 }

@@ -3,6 +3,7 @@ package com.example.prj1be20231109.service;
 import com.example.prj1be20231109.domain.Auth;
 import com.example.prj1be20231109.domain.Member;
 import com.example.prj1be20231109.mapper.BoardMapper;
+import com.example.prj1be20231109.mapper.CommentMapper;
 import com.example.prj1be20231109.mapper.MemberMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,8 @@ public class MemberService {
 
     private final MemberMapper mapper;
     private final BoardMapper boardMapper;
+    private final CommentMapper commentMapper;
+    private final BoardService boardService;
 
     public boolean add(Member member) {
         return mapper.insert(member) == 1;
@@ -62,11 +65,15 @@ public class MemberService {
 
 
     public boolean deleteMember(String id) {
+
+        commentMapper.deleteByMemberId(id);
+
         // 1. 이 멤버가 작성한 게시물 삭제
         boardMapper.deleteByWriter(id);
 
+        List<Integer>boardList = boardMapper.selectIdListByMemberId(id);
+        boardList.forEach((boardId)-> boardService.remove(boardId));
         // 2. 이 멤버 삭제
-
         return mapper.deleteById(id) == 1;
     }
 

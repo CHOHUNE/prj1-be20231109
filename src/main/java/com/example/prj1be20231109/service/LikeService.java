@@ -6,13 +6,15 @@ import com.example.prj1be20231109.mapper.LikeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class LikeService {
 
     private final LikeMapper mapper;
 
-    public void update(Like like, Member login) {
+    public Map<String, Object> update(Like like, Member login) {
 
         like.setMemberId(login.getId());
 
@@ -24,7 +26,22 @@ public class LikeService {
             count = mapper.insert(like);
         }
 
+        int countLike = mapper.countByBoardId(like.getBoardId());
+        return Map.of("like", count == 1,
+                "countLike", countLike);
 
+
+    }
+
+    public Map<String, Object> get(Integer boardId, Member login) {
+        int countLike = mapper.countByBoardId(boardId);
+
+        Like like = null;
+        if (login != null) {
+
+           like = mapper.selectByBoardIdAndMemberId(boardId, login.getId());
+        }
+        return Map.of("like", like != null, "countLike", countLike);
     }
 }
 

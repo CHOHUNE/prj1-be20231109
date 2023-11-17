@@ -12,4 +12,7 @@ public class Comment {
     private String memberNickName;
     private String comment;
     private LocalDateTime inserted;
+
+
+
 }

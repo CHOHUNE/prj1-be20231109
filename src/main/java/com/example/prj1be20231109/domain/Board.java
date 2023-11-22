@@ -1,13 +1,9 @@
 package com.example.prj1be20231109.domain;
-
-import com.example.prj1be20231109.util.AppUtill;
+import com.example.prj1be20231109.utill.AppUtill;
 import lombok.Data;
 
-import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Data
 public class Board {
@@ -15,15 +11,16 @@ public class Board {
     private String title;
     private String content;
     private String writer;
-    private LocalDateTime inserted;
     private String nickName;
+    private LocalDateTime inserted;
     private Integer countComment;
     private Integer countLike;
+    private Integer countFile;
+    private List<BoardFile> files;
 
-    public String getAgo(){
-        return AppUtill.getAgo(inserted,LocalDateTime.now());
+    public String getAgo() {
+        return AppUtill.getAgo(inserted, LocalDateTime.now());
     }
 
+
 }
-
-

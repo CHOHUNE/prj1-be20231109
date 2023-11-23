@@ -3,10 +3,13 @@ package com.example.prj1be20231109.utill;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 public class AppUtill {
-    public static String getAgo(LocalDateTime a, LocalDateTime b) {
+    public static String getAgo(LocalDateTime a) {
+
+        LocalDateTime b = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
         if (a.isBefore(b.minusYears(1))) {
             Period between = Period.between(a.toLocalDate(), b.toLocalDate());

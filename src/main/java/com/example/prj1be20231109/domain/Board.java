@@ -19,7 +19,7 @@ public class Board {
     private List<BoardFile> files;
 
     public String getAgo() {
-        return AppUtill.getAgo(inserted, LocalDateTime.now());
+        return AppUtill.getAgo(inserted);
     }
 
 
